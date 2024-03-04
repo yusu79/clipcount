@@ -84,7 +84,7 @@ $ clipcount -s
 $ clipcount -S
 22
 ```
-- 半角空白を削除して出力
+- 改行コードを削除して出力
 ```bash:
 # 改行コードが削除されて出力
 $ clipcount -b
