@@ -27,7 +27,7 @@ Windowsで上記のコマンドを実行した際に「`"WARNING: The script cli
 
 「`WARNING: Failed to write executable - trying to use .deleteme logic`」が表示されたなら、管理者権限でターミナルを実行した上でインストールしてください。詳しくは以下の記事をご参照ください。
 
-参考:[Error installing package with executable · Issue #9023 · pypa/pip](https://github.com/pypa/pip/issues/9023)
+参考: [Error installing package with executable · Issue #9023 · pypa/pip](https://github.com/pypa/pip/issues/9023)
 
 
 ## 使い方（Quick usage）
