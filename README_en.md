@@ -85,13 +85,13 @@ $ clipcount -b
 ```
 - Remove all whitespace characters:
 ```bash:
-# Full-width space characters are removed
+# All whitespace characters are removed.
 $ clipcount -sSbt
 18
 ```
 Alternatively, using `--split` yields the same result.
 ```bash:
-# Full-width space characters are removed
+# All whitespace characters are removed.
 $ clipcount --split
 18
 ```
