@@ -10,6 +10,7 @@ This is a Python package that reads text from the clipboard and outputs the char
 - [Quick Usage](#quick-usage)
 - [Usage](#usage)
 - [Dependencies](#dependencies)
+- [Dev-diary](#dev-diary)
 
 ## Setup
 Install via pip:
@@ -131,3 +132,6 @@ If you want to calculate half-width and full-width characters separately, you ca
 
 ## Dependencies
 - [pyperclip](https://github.com/asweigart/pyperclip)
+
+## Dev-diary
+- [【個人開発】文字数を計測できる「clipcount」 | ゆすノート](https://yusu79.com/dev-clipcount/)
