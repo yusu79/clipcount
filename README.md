@@ -51,7 +51,7 @@ clipcount [オプション]
 
 また、Pythonファイル上でインポートできます。
 注意点として、`-`や`--`を排除してオプションを渡してください。
-```python:
+```python
 from clipcount import clipcount
 x = clipcount({オプション})
 ```
