@@ -17,7 +17,7 @@
 
 ## インストール（Setup）
 pipでインストールします。
-```bash:
+```PowerShell
 pip install clipcount
 ```
 ### Windowsで「警告」が出た時の対処方法
@@ -45,7 +45,7 @@ Windowsで上記のコマンドを実行した際に「`"WARNING: The script cli
 
 
 CUIツールとして使用し、文字数をターミナル上に出力できます。
-```bash:
+```PowerShell
 clipcount [オプション]
 ```
 
@@ -62,72 +62,71 @@ x = clipcount({オプション})
 *※以下の例は「Windows」環境で実行しているので、改行コードを「`\r\n`」としてカウントしています。*
 
 以下の文章をコピーした上で、clipcountを実行します。
-```md:
+```markdown
 clipboardの
 文字　を読み込みます。
 ```
 
 #### CUI (ターミナルで使用)
 - そのまま実行する
-```bash:
+```PowerShell
 # 空白文字を含めた全ての文字数を出力
-$ clipcount
+> clipcount
 23
 ```
 - 半角空白を削除して出力
-```bash:
+```PowerShell
 # 上記の空白は全角空白なので何も変わらない
-$ clipcount -s
+> clipcount -s
 23
 ```
 - 全角空白を削除して出力
-```bash:
+```PowerShell
 # 全角空白が1文字削除されて出力
-$ clipcount -S
+> clipcount -S
 22
 ```
 - 改行コードを削除して出力
-```bash:
+```PowerShell
 # 改行コードが削除されて出力
-$ clipcount -b
+> clipcount -b
 21
 ```
 - 空白文字全てを削除して出力
-```bash:
+```PowerShell
 # 空白文字が全て削除されて出力
-$ clipcount -sSbt
+> clipcount -sSbt
 20
 ```
 もしくは`--split`を使っても同じ結果がでる。
-```bash:
+```PowerShell
 # 空白文字が全て削除されて出力
-$ clipcount --split
+> clipcount --split
 20
 ```
 - 半角英数を0.5文字と換算して出力
-```bash:
+```PowerShell
 # 半角英数は0.5文字になる
-$ clipcount -m
+> clipcount -m
 17.5
 ```
 - 空白文字全てを削除して、半角英数を0.5文字に換算
-```bash:
-$ clipcount -m --split
+```PowerShell
+> clipcount -m --split
 15.5
 ```
 
 #### インポート (Pythonで使用)
 clipcount関数をimport出来ます。
 
-```python:
-# クリップボードの文字数を変数に格納できる
+```python
 from clipcount import clipcount
 x = clipcount({"--split"})
 print(x)
 ```
-```bash:
+```PowerShell
 # 「clipcount --split」と同じ結果となる
-$ python hoge.py
+> python hoge.py
 20
 ```
 
@@ -144,8 +143,8 @@ print(x)
 y = clipcount({"-sSbt"})
 print(y)
 ```
-```bash:
-$ python hoge.py
+```PowerShell
+> python hoge.py
 20 # clipcount -sSbt として出力
 23 # オプションが機能せず、文字数をそのまま出力
 ```
@@ -164,8 +163,8 @@ $ python hoge.py
 
 ターミナルでオプションを組み合わせて使うことも可能です。例えば、全角空白とタブだけを削除して文字数をカウントしたい場合は、次のように実行します。
 
-```bash
-clipcount -St
+```PowerShell
+> clipcount -St
 ```
 
 Python から `import` して使うこともできます。この場合は、オプションをまとめて文字列として渡すのではなく、**1つずつセットにして渡す**必要があります。例えば次のように書きます。
