@@ -59,76 +59,141 @@ Read
 clipboard text.
 ```
 
-#### CLI
-- Run it as is:
-```bash:
-# Output the character count including whitespace characters
+#### CUI (Command Line Interface)
+
+* Run as is:
+
+```bash
+# Outputs the total number of characters including all whitespace
 $ clipcount
-21
-```
-- Remove half-width spaces and output:
-```bash:
-# One half-width space is removed and output
-$ clipcount -s
-20
-```
-- Remove full-width spaces:
-```bash:
-# The above spaces are half-width spaces, so nothing changes.
-$ clipcount -S
-21
-```
-- Remove line breaks:
-```bash:
-# Line breaks are removed and output
-$ clipcount -b
-19
-```
-- Remove all whitespace characters:
-```bash:
-# All whitespace characters are removed.
-$ clipcount -sSbt
-18
-```
-Alternatively, using `--split` yields the same result.
-```bash:
-# All whitespace characters are removed.
-$ clipcount --split
-18
-```
-- Calculate half-width alphanumeric characters as 0.5 and output:
-```bash:
-# Half-width alphanumeric characters are counted as 0.5
-$ clipcount -m
-10.5
+23
 ```
 
-#### Import
-It can also be used in a Python file with "import".
-As a note, when passing commands to options, please exclude "`-`" or "`--`".
-```python:
-# Store the character count of the clipboard in a variable
+* Remove half-width spaces:
+
+```bash
+# The whitespace in this example is full-width, so nothing changes
+$ clipcount -s
+23
+```
+
+* Remove full-width spaces:
+
+```bash
+# One full-width space is removed from the count
+$ clipcount -S
+22
+```
+
+* Remove newline characters:
+
+```bash
+# Newline characters are removed from the count
+$ clipcount -b
+21
+```
+
+* Remove all whitespace characters:
+
+```bash
+# All whitespace characters are removed
+$ clipcount -sSbt
+20
+```
+
+Or use `--split` to get the same result:
+
+```bash
+# All whitespace characters are removed
+$ clipcount --split
+20
+```
+
+* Count half-width alphanumeric characters as 0.5:
+
+```bash
+# Half-width alphanumeric characters count as 0.5
+$ clipcount -m
+17.5
+```
+
+* Remove all whitespace and count half-width characters as 0.5:
+
+```bash
+$ clipcount -m --split
+15.5
+```
+
+
+
+#### Import (Using clipcount in Python)
+
+You can import the `clipcount` function:
+
+```python
+# Store the clipboard character count in a variable
 from clipcount import clipcount
-x = clipcount({"split"})
+x = clipcount({"--split"})
 print(x)
 ```
-```bash:
-# Produces the same result as "clipcount --split"
-$ python foo.py
-18
+
+```bash
+# Produces the same result as `clipcount --split`
+$ python hoge.py
+20
+```
+
+**Important note:** When using `import` in Python, do **not** combine options like `-sSbt`. Each option must be passed **individually in a set**.
+
+```python
+from clipcount import clipcount
+
+# Correct usage (pass each option separately)
+x = clipcount({"-s", "-S", "-b", "-t"})
+print(x)
+
+# Incorrect: passing combined options will not work as expected
+y = clipcount({"-sSbt"})
+print(y)
+```
+
+```bash
+$ python hoge.py
+20  # Output is as if `clipcount -sSbt` was run correctly
+23  # The options do not work, so the original character count is returned
 ```
 
 ## Usage
-clipcount is a Python package that "reads the clipboard and outputs the character count."
-By default, it outputs the "character count including whitespace characters (line breaks, half-width spaces, full-width spaces, tabs)."
-It also calculates both half-width and full-width characters as "the same 1 character."
+`clipcount` is a Python package that counts the number of characters in the clipboard.
 
-With various options, you can output the character count after removing each whitespace character.
-When used in the terminal, options can be combined. For example, to output "the character count after removing only full-width spaces and tabs," you can use "`clipcount -St`".
+By default, it counts all characters, including whitespace such as newlines, half-width spaces, full-width spaces, and tabs. It does not distinguish between half-width and full-width characters; all characters are counted as **1 character** each.
 
-If you want to remove all whitespace characters at once, the "`--split`" option can be used. This has the same meaning as "`-bsSt`".
+You can also count characters after removing specific types of whitespace. For example, use `-b` to remove newlines, `-s` to remove half-width spaces, `-S` to remove full-width spaces, and `-t` to remove tabs.
 
-If you want to calculate half-width and full-width characters separately, you can use the "`-m`" option. This is an option to calculate half-width characters as "0.5 characters." It may be useful when considering character counts in situations like WordPress titles or meta keywords.
+If you want to remove all whitespace at once, you can use the `--split` option. This is equivalent to using `-b -s -S -t`.
+
+Additionally, if you want to distinguish between half-width and full-width characters when counting, you can use the `-m` option. With this option, half-width characters are counted as **0.5**, while full-width characters are counted as 1. This can be useful when checking character counts for WordPress titles, meta keywords, or similar contexts.
+
+You can also combine options in the terminal. For example, to remove only full-width spaces and tabs before counting, you can run:
+
+```bash
+clipcount -St
+```
+
+You can also use `clipcount` from Python by importing it. In this case, you should pass each option individually as a set, not as a combined string. For example:
+
+```python
+from clipcount import clipcount
+
+x = clipcount({"--split"})
+print(x)
+```
+
+**Important notes:**
+
+* When using Python, do **not** combine options like `-sSbt`; pass each option separately in the set.
+* All options must start with a hyphen (`-`). Passing options that do not start with a hyphen will raise an error.
+
 
 ## Dependencies
 - [pyperclip](https://github.com/asweigart/pyperclip)

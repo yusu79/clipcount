@@ -1,43 +1,33 @@
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "clipcount"
-version = "1.0.1"
-dependencies = [
-    "pyperclip >= 1.8.2"
-]
-requires-python = ">=3.8"
-authors = [
-    {name="yusu79"},
-    {email="oss@yusu79.com"}
-]
+version = "1.0.2"
 description = "Reads the clipboard and outputs the character count."
+authors = [
+    {name = "yusu79",email = "oss@yusu79.com"}
+]
 readme = "README_en.md"
-license = {file = "LICENSE"}
-keywords = [
-    "pyperclip",
-    "character_count",
-    "clipboard"
+requires-python = ">=3.13"
+dependencies = [
+    "pyperclip (>=1.10.0,<2.0.0)"
 ]
-classifiers = [
-  "Development Status :: 5 - Production/Stable",
-  "Intended Audience :: Developers",
-  "Topic :: Terminals",
-  "License :: OSI Approved :: MIT License",
-  "Programming Language :: Python"
-]
+license = { text = "MIT" }
 
 [project.urls]
 Homepage = "https://yusu79.com"
 Repository = "https://github.com/yusu79/clipcount"
+Changelog = "https://github.com/yusu79/clipcount/blob/main/CHANGELOG.md"
 
-[project.scripts]
-clipcount = "clipcount:main"
+[project.scripts] # cli.pyに登録されたmain関数を直接実行できる
+clipcount = "clipcount.cli:main" 
 
-[project.optional-dependencies]
+[tool.poetry]
+packages = [{include = "clipcount", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
 dev = [
-    "build",
-    "twine",
+    "pytest (>=8.4.2,<9.0.0)"
 ]
